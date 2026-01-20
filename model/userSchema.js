@@ -18,10 +18,16 @@ const controller = new Schema({
         type:String,
         required: true,
     },
-    isVerified:{
-        type: Boolean,
-        default: false,
+    otp:{
+        type:String,
     },
+    expireOtp:{
+        type:Date,
+    }
+    // isVerified:{
+    //     type: Boolean,
+    //     default: false,
+    // },
 
 })
 

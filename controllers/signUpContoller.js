@@ -2,6 +2,10 @@ const express = require ('express')
 const userSchema = require('../model/userSchema');
 const emailValidation = require('../helpers/emailValidation');
 const router = express.Router()
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const emailVarification = require('../helpers/emailVerification')
+
 
 
 
@@ -21,19 +25,31 @@ async function signUpController(req, res){
         return res.send("no validation");
      }
      const existingEmail = await userSchema.find({email})
-    // console.log(existingEmail.length);
+    // email duplicate email ache naki na check korar jonno
     if(existingEmail.length > 0){
-        res.send("ache akta email")
+        return res.send("ache akta email")
     }
-
-    const controller = userSchema({
+    //otp ar jonno 
+    const otp = crypto.randomInt(100000, 999999).toString()
+        console.log(otp);
+    //otp expire ar jonno
+    const expireOtp = new Date(Date.now() +10 * 60 * 1000)   
+    console.log(expireOtp)
+    //hash password ar jonno
+    bcrypt.hash(password, 10, function(err, hash) {
+      const controller = userSchema({
         firstname,
         lastname,
         email,
-        password,
+        password : hash,
+        otp,
+        expireOtp,
     })
+    emailVarification(email, otp)
     controller.save();
-    res.send("done!");
+    return res.send("done!");
+});
+ 
 }
 
 module.exports = signUpController
