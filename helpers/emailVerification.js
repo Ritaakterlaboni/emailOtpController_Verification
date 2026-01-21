@@ -3,7 +3,7 @@ const nodemailer = require ('nodemailer');
 async function emailVerification(email, otp){
 
     const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
+  service: "gmail",
   port: 587,
   secure: false, // Use true for port 465, false for port 587
   auth: {

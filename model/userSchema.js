@@ -23,11 +23,11 @@ const controller = new Schema({
     },
     expireOtp:{
         type:Date,
-    }
-    // isVerified:{
-    //     type: Boolean,
-    //     default: false,
-    // },
+    },
+    isVerified:{
+        type: Boolean,
+        default: false,
+    },
 
 })
 

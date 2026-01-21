@@ -24,9 +24,9 @@ async function signUpController(req, res){
      if(!emailValidation(email)){
         return res.send("no validation");
      }
-     const existingEmail = await userSchema.find({email})
+     const existingEmail = await userSchema.findOne({email})
     // email duplicate email ache naki na check korar jonno
-    if(existingEmail.length > 0){
+    if(existingEmail > 0){
         return res.send("ache akta email")
     }
     //otp ar jonno 
@@ -37,6 +37,7 @@ async function signUpController(req, res){
     console.log(expireOtp)
     //hash password ar jonno
     bcrypt.hash(password, 10, function(err, hash) {
+         if(err) return res.send("hash error");
       const controller = userSchema({
         firstname,
         lastname,
