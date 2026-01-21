@@ -4,7 +4,8 @@ const emailValidation = require('../helpers/emailValidation');
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const emailVarification = require('../helpers/emailVerification')
+const emailVarification = require('../helpers/emailVerification');
+const passwordValidation = require('../helpers/passwordValidation');
 
 
 
@@ -20,6 +21,9 @@ async function signUpController(req, res){
     }
     if(!password){
         return res.send("required password");
+     }
+      if(!passwordValidation(password)){
+        return res.send("password no validation");
      }
      if(!emailValidation(email)){
         return res.send("no validation");
