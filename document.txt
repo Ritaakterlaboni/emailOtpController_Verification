@@ -1,0 +1,31 @@
+1.install node with packegs
+2.install mongodb and connect
+3.creat databse file===> dbConnection.js
+4.create Route ===> index.js /Api ===> index.js, auth.js
+
+5.make a controllers folder ===> signinController.js and connect with ayth.js
+6.make a models folder ===> make a schema file for users(mongose, schema from mongose ===> firstname, lastname, email, password, otp, isverified)
+7.go to signinController ===> validation
+8.make a folder called helpers for email validation using regex
+9.go to signinController and send the data in database
+
+10.make hash password ===> install bcrypt==> 
+    bcrypt.hash(password, 10, function(err, hash)){
+        //store hash in your password code
+    }
+
+11.make Duplicate email error using length
+12.make require password error
+13.make otp option using crypto
+14.make a otp expire function ==>
+        const expireOtp = new Date(Date.now() +(10*60*1000))
+
+15.make a controller for nodemailler===>install nodemailler and config using helpers ==> emailVerification.js===>add otp password
+16.make sure otp email is correct ===> make otpController
+
+
+17.create resendotpController function in otpp Controller===> write otpConntroller code
+18.make loginController===> loginController.js
+
+19.make login Controller===> loginController.js
+20.make session system using express-session and install ,connect21.make dashboard Route with controller22.make layout Route with session destroy

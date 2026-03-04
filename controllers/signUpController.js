@@ -28,16 +28,16 @@ async function signUpController(req, res){
      if(!emailValidation(email)){
         return res.send("no validation");
      }
-     const existingEmail = await userSchema.findOne({email})
+     const existingEmail = await userSchema.find({email})
     // email duplicate email ache naki na check korar jonno
-    if(existingEmail > 0){
+    if(existingEmail.length > 0){
         return res.send("ache akta email")
     }
     //otp ar jonno 
     const otp = crypto.randomInt(100000, 999999).toString()
         // console.log(otp);
     //otp expire ar jonno
-    const expireOtp = new Date(Date.now() +10 * 60 * 1000)   
+    const expireOtp = new Date(Date.now() +(10 * 60 * 1000))   
     console.log(expireOtp)
     //hash password ar jonno
     bcrypt.hash(password, 10, function(err, hash) {
@@ -48,10 +48,11 @@ async function signUpController(req, res){
         email,
         password : hash,
         otp,
-        expireOtp,
-    })
-    emailVarification(email, otp)
+        expireOtp
+    });
     controller.save();
+    emailVarification(email, otp)
+    
     return res.send("done!");
 });
  
