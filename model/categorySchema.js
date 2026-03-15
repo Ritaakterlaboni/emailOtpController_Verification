@@ -6,13 +6,13 @@ const categorySchema = new Schema({
         type: String,
         trim: true,
         required:true,
-        uniqe:true
+        unique:true
     },
     description:{
         type: String,
         trim: true
     },
-    subcategory:[{
+    subCategoryList:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "subcategory"
 
@@ -20,3 +20,6 @@ const categorySchema = new Schema({
 })
 
 module.exports = mongoose.model ("category", categorySchema)
+
+
+// ref === mongoose.model ("subcategory", categorySchema) same same hote hobe
