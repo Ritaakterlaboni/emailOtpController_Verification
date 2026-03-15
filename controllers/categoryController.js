@@ -1,23 +1,18 @@
 const categorySchema = require('../model/categorySchema')
 
-function categoryController (req, res){
-const{name, description} = req.body;
-try{
-const createCategory = new categorySchema({
-    name,
-    description,
-    
-})
-createCategory.save()
-res.status(200).json({
-    message:"category Add sucessfully!"
-})
-}
-catch{
-    return res.json({
-        message:"error"
-    })
-}
+async function categoryController(req, res) {
+  const { name, description } = req.body;
+  try {
+    const createCategory = new categorySchema({
+      name,
+      description,
+    });
+    await createCategory.save();
+
+    return res.json({ message: "Category Added Successfully" });
+  } catch (error) {
+    return res.json({ message: "error", error: error.message});
+  }
 }
 
 async function getAllCategory(req, res){

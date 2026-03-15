@@ -19,7 +19,7 @@ async function subCategoryController(req, res) {
 
     const updatedCategory = await categorySchema.findOneAndUpdate(
         {_id: categoryId},
-        { $push: {subcategorylist: createSubCategory._id}}, 
+        { $push: {subCategoryList: createSubCategory._id}}, 
         {new: true}
         )
 

@@ -6,11 +6,11 @@ const categorySchema = new Schema({
         type: String,
         trim: true,
         required:true,
-        unique:true
     },
     description:{
         type: String,
-        trim: true
+        trim: true,
+       
     },
     subCategoryList:[{
         type: mongoose.Schema.Types.ObjectId,
