@@ -29,7 +29,17 @@ async function subCategoryController(req, res) {
   }
 }
 
-module.exports = subCategoryController
+async function getAllSubCategory (req, res){
+const getsubCategorylist = await subCategorySchema.find({});
+return res.json({message:'paisi sub all data', data:getsubCategorylist})
+}
+
+module.exports = {subCategoryController, getAllSubCategory}
 
 
 //check korbo age existing subcategory ase ki na na thakle notun create korbo
+
+//if (existing) {
+//   return error;
+// }
+// create();

@@ -4,13 +4,15 @@ const {
     categoryController, 
     getAllCategory
 } = require("../../controllers/categoryController");
-const subCategoryController = require('../../controllers/subCategoryController');
+const {subCategoryController, getAllSubCategory} = require('../../controllers/subCategoryController');
 
 
 
 router.post('/createcategory' , categoryController);
 router.get('/getallcategory', getAllCategory);
-router.post('/createsubcategory', subCategoryController)
+router.post('/createsubcategory', subCategoryController);
+router.get('/getallsubcategory', getAllSubCategory);
+
 
 
 module.exports = router;
