@@ -43,8 +43,8 @@ const deleteCategory = await categorySchema.findByIdAndDelete(id)
 res.json({message:"delete product", data:deleteCategory})
 }
 
-function deleteAllCategory(req, res){
-const deleteAllCategory = categorySchema.deleteMany();
+async function deleteAllCategory(req, res){
+const deleteAllCategory = await categorySchema.deleteMany({});
 res.json({message:"delete all category", data:deleteAllCategory});
 }
 
