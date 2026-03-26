@@ -29,9 +29,9 @@ async function subCategoryController(req, res) {
   }
 }
 
-async function getAllSubCategory (req, res){
-const getsubCategorylist = await subCategorySchema.find({});
-return res.json({message:'paisi sub all data', data:getsubCategorylist})
+async function getAllSubCategory(req, res){
+  const getAllSubCategory = await subCategorySchema.find({})
+  return res.json({message:"paisi", data:getAllSubCategory})
 }
 
 module.exports = {subCategoryController, getAllSubCategory}

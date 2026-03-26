@@ -22,6 +22,27 @@ async function getAllCategory(req, res){
     res.json({message: 'paisi category', data: getCategoryList});
 }
 
-module.exports = {categoryController, getAllCategory}
+async function updateCategoryController(req, res){
+const { id } = req.params;
+//url ar modde thaka dynamic data nite use kori req.params == ja diye amra specific identity bujhi
+// console.log(id);   
+const {name, description} = req.body;
+const updateCategory = await categorySchema.findById(id)
+updateCategory.name = name;
+updateCategory.description = description;
+// console.log(updateCategory)
+
+await updateCategory.save();
+res.json({message:"update hoise", data:updateCategory})
+
+}
+
+async function deleteCategoryController(req, res){
+const {id} = req.params;
+const deleteCategory = await categorySchema.findByIdAndDelete(id)
+res.json({message:"delete product", data:deleteCategory})
+}
+
+module.exports = {categoryController, getAllCategory, updateCategoryController,deleteCategoryController}
 
 
