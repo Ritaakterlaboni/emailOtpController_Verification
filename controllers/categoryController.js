@@ -43,6 +43,11 @@ const deleteCategory = await categorySchema.findByIdAndDelete(id)
 res.json({message:"delete product", data:deleteCategory})
 }
 
-module.exports = {categoryController, getAllCategory, updateCategoryController,deleteCategoryController}
+function deleteAllCategory(req, res){
+const deleteAllCategory = categorySchema.deleteMany();
+res.json({message:"delete all category", data:deleteAllCategory});
+}
+
+module.exports = {categoryController, getAllCategory, updateCategoryController,deleteCategoryController, deleteAllCategory}
 
 

@@ -4,7 +4,8 @@ const {
     categoryController, 
     getAllCategory,
     updateCategoryController,
-    deleteCategoryController
+    deleteCategoryController,
+    deleteAllCategory
 } = require("../../controllers/categoryController");
 const {subCategoryController, getAllSubCategory} = require('../../controllers/subCategoryController');
 
@@ -15,7 +16,8 @@ router.get('/getallcategory', getAllCategory);
 router.post('/createsubcategory', subCategoryController);
 router.get('/getallsubcategory', getAllSubCategory);
 router.patch("/updatecategory/:id", updateCategoryController);
-router.delete("/deletecategory/:id", deleteCategoryController)
+router.delete("/deletecategory/:id", deleteCategoryController);
+router.delete("/deleteallcategory", deleteAllCategory);
 
 
 
