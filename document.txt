@@ -3,7 +3,7 @@
 3.creat databse file===> dbConnection.js
 4.create Route ===> index.js /Api ===> index.js, auth.js
 
-5.make a controllers folder ===> signinController.js and connect with ayth.js
+5.make a controllers folder ===> signinController.js and connect with auth.js
 6.make a models folder ===> make a schema file for users(mongose, schema from mongose ===> firstname, lastname, email, password, otp, isverified)
 7.go to signinController ===> validation
 8.make a folder called helpers for email validation using regex

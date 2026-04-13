@@ -8,8 +8,6 @@ const emailVarification = require('../helpers/emailVerification');
 const passwordValidation = require('../helpers/passwordValidation');
 
 
-
-
 async function signUpController(req, res){
     // console.log("signupcontroller paisi")
     const {firstname, lastname, email, password} = req.body
@@ -38,7 +36,7 @@ async function signUpController(req, res){
         // console.log(otp);
     //otp expire ar jonno
     const expireOtp = new Date(Date.now() +(10 * 60 * 1000))   
-    console.log(expireOtp)
+    // console.log(expireOtp)
     //hash password ar jonno
     bcrypt.hash(password, 10, function(err, hash) {
          if(err) return res.send("hash error");
