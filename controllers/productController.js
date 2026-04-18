@@ -5,9 +5,7 @@ async function productController(req, res) {
     const { name, description, category, price, size, color, ram, storage } =
         req.body;
 
-    if (!req.file) {
-        return res.send("Image is required");
-    }
+
     // const imagePath = req.file.buffer
     const imagePath = req.file.path
 
