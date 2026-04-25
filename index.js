@@ -15,7 +15,7 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-// 
+// img upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.get('/', (req, res) => {

@@ -30,3 +30,37 @@
 19.make login Controller===> loginController.js
 20.make session system using express-session and install ,connect21.make dashboard Route with controller22.make layout Route with session destroy
 
+
+
+
+
+Cloudinary img uploade
+==========================================================
+
+1 . cloudinary te account create , multer , clodinary terminal a install
+2. cloudinary thake ==> cloude name, ket secret, key id niya .env file rakte hobe DB te use korte
+3. product controller   ==>   const imagePath = req.file.path  ==> variable a aita rakbo await diye (const imageUrl = await uploadImage(imagePath))
+4. product create korbo schema use kore tar modde img a ==> imageUrl.secure_url 
+5. middleware a cloudinary file nite hobe r mogoose thake copy paste korte hobe
+6. api==> product.js ==> multer thake (diskStorage) ==>
+
+
+        const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split(".")[1])
+    //  + '.' + file.originalname.split(".")[1] split korar jonno
+  }
+})
+
+
+const upload = multer({ storage: storage })
+
+7. project ar main index file a ==>
+
+    app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
+8. try ==> Hoppscotch.io 

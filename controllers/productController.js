@@ -9,7 +9,7 @@ async function productController(req, res) {
     // const imagePath = req.file.buffer
     const imagePath = req.file.path
 
-    console.log(imagePath)
+    // console.log(imagePath)
 
     const imageUrl = await uploadImage(imagePath)
 
