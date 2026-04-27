@@ -8,7 +8,17 @@ const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 3000
 app.use(express.json())
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://dashboard-five-fawn-27.vercel.app",
+      "https://orebi-ecom-theta.vercel.app",
+    ],
+    credentials: true,
+  }),
+);
 
 app.use(session({
   secret: 'ecommerce',
