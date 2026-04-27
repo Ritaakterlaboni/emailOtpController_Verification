@@ -1,65 +1,65 @@
-const express = require ('express')
-const userSchema = require('../model/userSchema');
-const emailValidation = require('../helpers/emailValidation');
-const router = express.Router()
-const bcrypt = require('bcrypt');
-const crypto = require('crypto');
-const emailVarification = require('../helpers/emailVerification');
-const passwordValidation = require('../helpers/passwordValidation');
+const express = require("express");
+const userSchema = require("../model/userSchema");
+const emailValidation = require("../helpers/emailValidation");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const emailVarification = require("../helpers/emailVerification");
 
+const router = express.Router();
 
-async function signUpController(req, res){
-    // console.log("signupcontroller paisi")
-    const {firstname, lastname, fullname, email, password} = req.body
-      if(!firstname || !lastname || !fullname){
-       return res.send("required name");
+async function signUpController(req, res) {
+  try {
+    const { firstname, lastname, fullname, email, password } = req.body;
+
+    // validation
+    if (!firstname || !lastname || !fullname) {
+      return res.status(400).send("Name required");
     }
-    if(!email){
-       return res.send("required email");
+
+    if (!email) {
+      return res.status(400).send("Email required");
     }
-    if(!password){
-        return res.send("required password");
-     }
-    //   if(!passwordValidation(password)){
-    //     return res.send("password no validation");
-    //  }
-     if(!emailValidation(email)){
-        return res.send("no validation");
-     }
-     const existingEmail = await userSchema.find({email})
-    // email duplicate email ache naki na check korar jonno
-    if(existingEmail.length > 0){
-        return res.send("ache akta email")
+
+    if (!password) {
+      return res.status(400).send("Password required");
     }
-    //otp ar jonno 
-    const otp = crypto.randomInt(100000, 999999).toString()
-        // console.log(otp);
-    //otp expire ar jonno
-    const expireOtp = new Date(Date.now() +(10 * 60 * 1000))   
-    // console.log(expireOtp)
-    //hash password ar jonno
-    bcrypt.hash(password, 10, function(err, hash) {
-         if(err) return res.send("hash error");
-      const controller = userSchema({
-        firstname,
-        lastname,
-        fullname,
-        email,
-        password : hash,
-        otp,
-        expireOtp
+
+    if (!emailValidation(email)) {
+      return res.status(400).send("Invalid email");
+    }
+
+    // duplicate check
+    const existingEmail = await userSchema.findOne({ email });
+    if (existingEmail) {
+      return res.status(409).send("Email already exists");
+    }
+
+    // OTP generate
+    const otp = crypto.randomInt(100000, 999999).toString();
+    const expireOtp = new Date(Date.now() + 10 * 60 * 1000);
+
+    // hash password
+    const hash = await bcrypt.hash(password, 10);
+
+    // create user
+    const newUser = await userSchema.create({
+      firstname,
+      lastname,
+      fullname,
+      email,
+      password: hash,
+      otp,
+      expireOtp,
     });
-    controller.save();
-    emailVarification(email, otp)
-    
-    return res.send("done!");
-});
- 
+
+    // send email (OTP)
+    await emailVarification(email, otp);
+
+    return res.status(201).send("Signup successful, OTP sent!");
+
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
 }
 
-module.exports = signUpController
-
-
-
-//bar bar res.send dawya te error ase tai return age disi
- 
+module.exports = signUpController;
