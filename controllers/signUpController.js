@@ -10,8 +10,8 @@ const passwordValidation = require('../helpers/passwordValidation');
 
 async function signUpController(req, res){
     // console.log("signupcontroller paisi")
-    const {firstname, lastname, email, password} = req.body
-      if(!firstname || !lastname){
+    const {firstname, lastname, fullname, email, password} = req.body
+      if(!firstname || !lastname || !fullname){
        return res.send("required name");
     }
     if(!email){
@@ -20,9 +20,9 @@ async function signUpController(req, res){
     if(!password){
         return res.send("required password");
      }
-      if(!passwordValidation(password)){
-        return res.send("password no validation");
-     }
+    //   if(!passwordValidation(password)){
+    //     return res.send("password no validation");
+    //  }
      if(!emailValidation(email)){
         return res.send("no validation");
      }
@@ -43,6 +43,7 @@ async function signUpController(req, res){
       const controller = userSchema({
         firstname,
         lastname,
+        fullname,
         email,
         password : hash,
         otp,

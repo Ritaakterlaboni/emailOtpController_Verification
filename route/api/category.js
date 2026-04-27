@@ -12,9 +12,9 @@ const {subCategoryController, getAllSubCategory} = require('../../controllers/su
 
 
 router.post('/createcategory' , categoryController);
-router.get('/getallcategory', getAllCategory);
+router.get('/getcategory', getAllCategory);
 router.post('/createsubcategory', subCategoryController);
-router.get('/getallsubcategory', getAllSubCategory);
+router.get('/getsubcategory', getAllSubCategory);
 router.patch("/updatecategory/:id", updateCategoryController);
 router.delete("/deletecategory/:id", deleteCategoryController);
 router.delete("/deleteallcategory", deleteAllCategory);

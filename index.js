@@ -5,8 +5,10 @@ const session = require('express-session')
 const dbConnection = require('./database/dbConnection')
 const  route  = require('./route')
 const app = express()
+const cors = require('cors')
 const port = 3000
 app.use(express.json())
+app.use(cors());
 
 app.use(session({
   secret: 'ecommerce',
